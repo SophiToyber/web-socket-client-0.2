@@ -34,8 +34,8 @@ public class ServerConnectionService {
 
 	public String sendCreateConnectionRequestAndGetTopic(Client client) {
 		try {
-			String receivedЕopic = connection.connect(CONNECTION_URL, client);
-			return receivedЕopic;
+			String receivedTopic = connection.connect(CONNECTION_URL, client);
+			return receivedTopic;
 		} catch (JsonProcessingException e) {
 			return String.format("Error: %s ", e.getMessage());
 		}

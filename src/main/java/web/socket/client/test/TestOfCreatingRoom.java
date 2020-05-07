@@ -22,13 +22,11 @@ public class TestOfCreatingRoom {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 
 		SpringApplication.run(TestOfCreatingRoom.class, args);
-		Client client = Client.builder().name("Misha").topic("java").expectedRoom("default").build();
+		Client client = Client.builder().name("Misha").topic("duck").expectedRoom("javax").build();
 
-		String roomStatus = service.sendCreateRoomRequestAndGetStatus(client);
-		if (roomStatus.equals("created")) {
+		String connectingResult = service.sendCreateConnectionRequestAndGetTopic(client);
+		client.setTopic(connectingResult);
 			connector.configureWebsocket(client).send(String.format("/app/chat/%s", client.getTopic()),
-					Message.builder().from(client.getName()).text("Hello Spring nigga").build());
-		} else
-			log.error("ERROR CREATING");
+					Message.builder().from(client.getName()).text("Fuck u, stupid DUCK").build());
 	}
 }
