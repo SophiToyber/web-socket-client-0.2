@@ -1,0 +1,24 @@
+# Ignore IDE and compiled source
+
+.classpath
+.project
+.settings
+
+### Gradle ###
+*/.gradle
+.gradle
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# also gitignore
+bin/main/*
+bin/	
+bin
+WEB-INF/
