@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="500.0"
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	prefHeight="500.0" prefWidth="500.0"
+	style="-fx-background-image: url(&quot;file:/home/duck/Messenger/1_UI/web-socket-client/img/background.jpg&quot;);"
 	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="appearance.application.ui.CreateRoomController">
 	<children>
-		<GridPane layoutX="50.0" layoutY="85.0" prefHeight="235.0"
-			prefWidth="409.0">
+		<GridPane layoutX="42.0" layoutY="85.0" prefHeight="224.0"
+			prefWidth="449.0">
 			<columnConstraints>
 				<ColumnConstraints hgrow="SOMETIMES"
-					maxWidth="199.0" minWidth="10.0" prefWidth="103.0" />
+					maxWidth="199.0" minWidth="10.0" prefWidth="145.0" />
 				<ColumnConstraints hgrow="SOMETIMES"
-					maxWidth="306.0" minWidth="10.0" prefWidth="306.0" />
+					maxWidth="306.0" minWidth="10.0" prefWidth="304.0" />
 			</columnConstraints>
 			<rowConstraints>
 				<RowConstraints maxHeight="127.0" minHeight="10.0"
@@ -25,25 +28,34 @@
 					prefHeight="110.0" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Label prefHeight="15.0" prefWidth="104.0" text="Ім'я">
-					<font>
-						<Font size="15.0" />
-					</font>
-				</Label>
 				<TextField GridPane.columnIndex="1" />
-				<Label prefHeight="15.0" prefWidth="104.0" text="Назва чату"
-					GridPane.rowIndex="1">
+				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+				<Label alignment="TOP_RIGHT" contentDisplay="RIGHT"
+					prefHeight="0.0" prefWidth="142.0"
+					style="-fx-background-color: black;" text="Назва чату"
+					textAlignment="CENTER" textFill="#ffffffb8"
+					textOverrun="CENTER_ELLIPSIS" GridPane.rowIndex="1">
 					<font>
-						<Font size="15.0" />
+						<Font size="22.0" />
 					</font>
 				</Label>
-				<TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+				<Label alignment="TOP_RIGHT" contentDisplay="RIGHT"
+					prefHeight="26.0" prefWidth="172.0"
+					style="-fx-background-color: black;" text="Юзернейм"
+					textAlignment="CENTER" textFill="#ffffffb8"
+					textOverrun="CENTER_ELLIPSIS">
+					<font>
+						<Font size="22.0" />
+					</font>
+				</Label>
 			</children>
 		</GridPane>
-		<Button layoutX="180.0" layoutY="320.0" mnemonicParsing="false"
-			prefHeight="38.0" prefWidth="149.0" text="Створити">
+		<Button layoutX="136.0" layoutY="316.0" mnemonicParsing="false"
+			prefHeight="64.0" prefWidth="261.0"
+			style="-fx-background-color: black;" text="Створити"
+			textFill="#fffcfcd0">
 			<font>
-				<Font size="20.0" />
+				<Font size="34.0" />
 			</font>
 		</Button>
 	</children>

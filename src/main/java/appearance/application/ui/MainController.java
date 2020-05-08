@@ -38,6 +38,7 @@ public class MainController extends ControllersConfiguration implements Initiali
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		window.setScene(tableViewScene);
+		window.setResizable(false);
 		window.show();
 	}
 
@@ -47,6 +48,7 @@ public class MainController extends ControllersConfiguration implements Initiali
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		window.setScene(tableViewScene);
+		window.setResizable(false);
 		window.show();
 	}
 
