@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 @SuppressWarnings("SpringJavaAutowiringInspection")
 public class CreateRoomController {
 
-	@FXML
     public void initialize() {
     	// JavaFX initialization phase
     }

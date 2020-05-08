@@ -1,12 +1,18 @@
 package appearance.application.ui;
 
+import java.awt.TextField;
+
 import javax.annotation.PostConstruct;
+
+import com.sun.javafx.text.TextLine;
 
 import javafx.fxml.FXML;
 
 public class ConnectRoomController {
 
-	@FXML
+	@FXML private TextField nameTextLine;
+	@FXML private TextField expectedRoomTextLine;
+	
 	public void initialize() {
 		// JavaFX initialization phase
 	}
@@ -14,7 +20,6 @@ public class ConnectRoomController {
 	@SuppressWarnings("unchecked")
 	@PostConstruct
 	public void init() {
-
 	}
 
 }
