@@ -36,13 +36,7 @@ public class MainController extends ControllersConfiguration implements Initiali
 	}
 
 	public void conectToRoom(ActionEvent event) throws IOException {
-		Scene tableViewScene = new Scene(loadView("fxml/ConnectToRoom.fxml").getView());
-		// This line gets the Stage information
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-		window.setScene(tableViewScene);
-		window.setResizable(false);
-		window.show();
+		changeScene("fxml/ConnectToRoom.fxml",event);
 	}
 
 	@Override
@@ -51,14 +45,4 @@ public class MainController extends ControllersConfiguration implements Initiali
 
 	}
 	
-	public void changeScene(String scene, ActionEvent event) throws IOException {
-		Scene tableViewScene = new Scene(loadView(scene).getView());
-		// This line gets the Stage information
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-		window.setScene(tableViewScene);
-		window.setResizable(false);
-		window.show();
-	}
-
 }

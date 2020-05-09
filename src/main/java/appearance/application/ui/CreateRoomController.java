@@ -1,6 +1,7 @@
 package appearance.application.ui;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 import javax.annotation.PostConstruct;
 
@@ -27,6 +28,16 @@ public class CreateRoomController extends ControllersConfiguration implements IA
 	@FXML
 	private TextField roomTextLine;
 
+	public static Client client;
+	
+	public CreateRoomController() {
+        this.client = new Client();
+    }
+	
+	public Client getClient() {
+		return client;
+	}
+	
 	public void initialize() {
 		// JavaFX initialization phase
 	}
@@ -40,20 +51,18 @@ public class CreateRoomController extends ControllersConfiguration implements IA
 	public void createRoom(ActionEvent event) throws IOException {
 		ServerConnectionService service = new ServerConnectionService(new ServerConnector());
 		try {
-			String roomStatus = service.sendCreateRoomRequestAndGetStatus(Client.builder().name(nameTextLine.getText())
-					.topic(roomTextLine.getText()).expectedRoom("default").build());
+			client = Client.builder().name(nameTextLine.getText()).topic(roomTextLine.getText()).expectedRoom("default")
+					.build();
+			String roomStatus = service.sendCreateRoomRequestAndGetStatus(client);
 
 			if (roomStatus.equals("created")) {
 				showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(), "Success",
 						String.format("Information about creating: %s", roomStatus));
 			}
-			Scene tableViewScene = new Scene(loadView("fxml/Messaging.fxml").getView());
-			// This line gets the Stage information
-			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-			window.setScene(tableViewScene);
-			window.setResizable(false);
-			window.show();
+			changeScene("fxml/Messaging.fxml", event);
+			
+			log.error(client.toString());
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			showAlert(Alert.AlertType.ERROR, ((Node) event.getSource()).getScene().getWindow(), "Sorry :(",

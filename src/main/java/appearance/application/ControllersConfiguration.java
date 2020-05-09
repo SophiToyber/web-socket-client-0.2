@@ -7,8 +7,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import appearance.application.ui.MainController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 @Configuration
 public class ControllersConfiguration {
@@ -74,6 +78,16 @@ public class ControllersConfiguration {
 		public void setController(Object controller) {
 			this.controller = controller;
 		}
+	}
+	
+	public void changeScene(String scene, ActionEvent event) throws IOException {
+		Scene tableViewScene = new Scene(loadView(scene).getView());
+		// This line gets the Stage information
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		window.setScene(tableViewScene);
+		window.setResizable(false);
+		window.show();
 	}
 
 }

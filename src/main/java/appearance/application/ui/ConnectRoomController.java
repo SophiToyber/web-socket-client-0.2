@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 
+import appearance.application.ControllersConfiguration;
 import appearance.application.ui.interfaces.IAllert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,7 @@ import web.socket.client.connecting.option.ServerConnector;
 import web.socket.client.connecting.service.ServerConnectionService;
 
 @SuppressWarnings("SpringJavaAutowiringInspection")
-public class ConnectRoomController implements IAllert {
+public class ConnectRoomController extends ControllersConfiguration implements IAllert {
 
 	@FXML
 	private TextField nameTextLine;
@@ -46,6 +47,7 @@ public class ConnectRoomController implements IAllert {
 				showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(), "Success",
 						String.format("Connection active \n Your topic is: %s", connectingResult));
 			}
+			changeScene("fxml/Messaging.fxml",event);
 		} catch (Exception e) {
 			showAlert(Alert.AlertType.ERROR, ((Node) event.getSource()).getScene().getWindow(), "Sorry :(",
 					"Room is not created or you write incorrect RoomName");
