@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="625.0"
+	style="-fx-background-image: url(&quot;file:/home/duck/Messenger/1_UI/web-socket-client/img/img.jpg&quot;);"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="appearance.application.ui.MessageController">
+	<children>
+		<TextArea fx:id="messageList" editable="false" focusTraversable="false" layoutX="30.0" layoutY="14.0"
+			prefHeight="400.0" prefWidth="565.0" style="-fx-border-color: black;">
+			<font>
+				<Font size="15.0" />
+			</font>
+		</TextArea>
+		<TextArea fx:id="message" layoutX="30.0" layoutY="433.0"
+			prefHeight="43.0" prefWidth="492.0" style="-fx-border-color: black;"
+			wrapText="true">
+			<font>
+				<Font size="15.0" />
+			</font>
+		</TextArea>
+		<Button layoutX="522.0" layoutY="433.0" mnemonicParsing="false"
+			onAction="#sendMessage" prefHeight="43.0" prefWidth="73.0"
+			style="-fx-background-color: black;" text="Send" textFill="WHITE">
+			<font>
+				<Font size="17.0" />
+			</font>
+		</Button>
+	</children>
+</AnchorPane>

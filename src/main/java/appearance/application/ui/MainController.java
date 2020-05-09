@@ -32,14 +32,7 @@ public class MainController extends ControllersConfiguration implements Initiali
 	}
 
 	public void createRoom(ActionEvent event) throws IOException {
-
-		Scene tableViewScene = new Scene(loadView("fxml/CreateRoom.fxml").getView());
-		// This line gets the Stage information
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-		window.setScene(tableViewScene);
-		window.setResizable(false);
-		window.show();
+		changeScene("fxml/CreateRoom.fxml", event);
 	}
 
 	public void conectToRoom(ActionEvent event) throws IOException {
@@ -56,6 +49,16 @@ public class MainController extends ControllersConfiguration implements Initiali
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void changeScene(String scene, ActionEvent event) throws IOException {
+		Scene tableViewScene = new Scene(loadView(scene).getView());
+		// This line gets the Stage information
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		window.setScene(tableViewScene);
+		window.setResizable(false);
+		window.show();
 	}
 
 }
