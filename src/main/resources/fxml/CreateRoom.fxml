@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-image: url(&quot;file:/home/duck/Messenger/1_UI/web-socket-client/img/background.jpg&quot;);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appearance.application.ui.CreateRoomController">
+	<children>
+		<Button layoutX="120.0" layoutY="297.0" mnemonicParsing="false" onAction="#createRoom" prefHeight="64.0" prefWidth="261.0" style="-fx-background-color: #52527a;" text="Створити" textFill="#000000e8">
+			<font>
+				<Font size="34.0" />
+			</font>
+		</Button>
+		<Label alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="14.0" layoutY="106.0" prefHeight="26.0" prefWidth="172.0" style="-fx-background-color: #000033;" text="Юзернейм" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+			<font>
+				<Font size="22.0" />
+			</font>
+		</Label>
+		<TextField fx:id="nameTextLine" layoutX="187.0" layoutY="106.0" prefHeight="26.0" prefWidth="299.0" promptText="Введіть ім'я користувача">
+			<font>
+				<Font size="15.0" />
+			</font>
+		</TextField>
+		<Label alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="14.0" layoutY="207.0" prefHeight="26.0" prefWidth="172.0" style="-fx-background-color: #000033;" text="Назва чату" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+			<font>
+				<Font size="22.0" />
+			</font>
+		</Label>
+		<TextField fx:id="roomTextLine" layoutX="187.0" layoutY="207.0" prefHeight="26.0" prefWidth="299.0" promptText="Введіть назву кімнати">
+			<font>
+				<Font size="15.0" />
+			</font>
+		</TextField>
+	</children>
+</AnchorPane>

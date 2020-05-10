@@ -8,15 +8,15 @@ import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.stereotype.Component;
 
+import appearance.application.ui.connectors.ConnectRoomMessageController;
+import appearance.application.ui.creators.CreateRoomMessageController;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import web.socket.message.Message;
 
 @Slf4j
-@Data
 @Builder
 @Component
 @NoArgsConstructor
@@ -25,8 +25,11 @@ public class MyStompSessionHandler extends StompSessionHandlerAdapter {
 
 	private Message message;
 
+	public static CreateRoomMessageController actualCreateControllerObj = CreateRoomMessageController.messageController;
+	public static ConnectRoomMessageController actualConnectControllerObj = ConnectRoomMessageController.messageController;
 	// As you can see, the class is an extension from the Stom Sesion Adapter class
 	// which allows us to override two main and one side methods
+
 	private void subscribeTopic(StompSession session, String endpoint) {
 
 		session.subscribe(endpoint, new StompFrameHandler() {
@@ -40,11 +43,16 @@ public class MyStompSessionHandler extends StompSessionHandlerAdapter {
 			@Override
 			public void handleFrame(StompHeaders headers, Object payload) {
 				Message msg = (Message) payload;
+				actualCreateControllerObj.messageList
+						.appendText(String.format("%s: %s \n", msg.getFrom(), msg.getText()));
+				actualConnectControllerObj.messageList
+						.appendText(String.format("%s: %s \n", msg.getFrom(), msg.getText()));
 				log.info(String.format("Received + %s", msg.getText()));
 			}
 		});
 	}
-	// This medot just do something after connection
+
+	// This method call subscribe topic method
 	@Override
 	public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
 		System.out.println(String.format("User: %s - connected", message.getFrom()));
