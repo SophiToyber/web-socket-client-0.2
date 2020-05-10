@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.geometry.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane maxHeight="-Infinity"
+	maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0"
+	style="-fx-background-image: url(&quot;file:/home/duck/Messenger/1_UI/web-socket-client/img/conToRoom.png&quot;);"
+	xmlns="http://javafx.com/javafx/8	" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="appearance.application.ui.ConnectRoomController">
+	<children>
+		<Button layoutX="101.0" layoutY="302.0" mnemonicParsing="false"
+			onAction="#checkRoom" prefHeight="64.0" prefWidth="299.0"
+			style="-fx-background-color: black;" text="Під'єднатись"
+			textFill="#fffcfcd0">
+			<font>
+				<Font size="34.0" />
+			</font>
+		</Button>
+		<Pane layoutX="7.0" layoutY="4.0" prefHeight="298.0"
+			prefWidth="486.0">
+			<children>
+				<Label alignment="TOP_RIGHT" contentDisplay="RIGHT"
+					layoutX="7.0" layoutY="125.0" prefHeight="26.0" prefWidth="141.0"
+					style="-fx-background-color: #884dff;" text="Юзернейм"
+					textAlignment="CENTER" textFill="#000000b8"
+					textOverrun="CENTER_ELLIPSIS">
+					<font>
+						<Font size="22.0" />
+					</font>
+				</Label>
+				<TextField fx:id="nameTextLine" layoutX="148.0"
+					layoutY="124.0" prefHeight="28.0" prefWidth="329.0"
+					promptText="Введіть ім'я користувача"
+					style="-fx-background-color: #A52A2A;">
+					<font>
+						<Font size="15.0" />
+					</font>
+				</TextField>
+				<Label alignment="TOP_RIGHT" contentDisplay="RIGHT"
+					layoutX="14.0" layoutY="212.0" prefHeight="28.0" prefWidth="141.0"
+					style="-fx-background-color: #884dff;" text="Кімната"
+					textAlignment="CENTER" textFill="#000000b8"
+					textOverrun="CENTER_ELLIPSIS">
+					<font>
+						<Font size="22.0" />
+					</font>
+				</Label>
+				<TextField fx:id="expectedRoomTextLine" layoutX="155.0"
+					layoutY="212.0" prefHeight="29.0" prefWidth="329.0"
+					promptText="Введіть назву очікуваної кімнати"
+					style="-fx-background-color: #A52A2A;">
+					<font>
+						<Font size="15.0" />
+					</font>
+				</TextField>
+			</children>
+		</Pane>
+
+	</children>
+</AnchorPane>
