@@ -1,7 +1,6 @@
-package appearance.application.ui;
+package appearance.application.ui.connectors;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 import javax.annotation.PostConstruct;
 
@@ -10,30 +9,26 @@ import appearance.application.ui.interfaces.IAllert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import lombok.extern.slf4j.Slf4j;
 import web.socket.client.Client;
 import web.socket.client.connecting.option.ServerConnector;
 import web.socket.client.connecting.service.ServerConnectionService;
 
-@Slf4j
 @SuppressWarnings("SpringJavaAutowiringInspection")
-public class CreateRoomController extends ControllersConfiguration implements IAllert {
+public class ConnectRoomController extends ControllersConfiguration implements IAllert {
 
 	@FXML
 	private TextField nameTextLine;
 	@FXML
-	private TextField roomTextLine;
+	private TextField expectedRoomTextLine;
 
 	public static Client client;
-	
-	public static Client getClientFromCreateRoomController() {
+
+	public static Client getClientFromConnectRoomController() {
 		return client;
 	}
-	
+
 	public void initialize() {
 		// JavaFX initialization phase
 	}
@@ -41,28 +36,28 @@ public class CreateRoomController extends ControllersConfiguration implements IA
 	@SuppressWarnings("unchecked")
 	@PostConstruct
 	public void init() {
+
 	}
 
 	@FXML
-	public void createRoom(ActionEvent event) throws IOException {
+	public void checkRoom(ActionEvent event) throws IOException {
 		ServerConnectionService service = new ServerConnectionService(new ServerConnector());
 		try {
-			client = Client.builder().name(nameTextLine.getText()).topic(roomTextLine.getText()).expectedRoom("default")
-					.build();
-			String roomStatus = service.sendCreateRoomRequestAndGetStatus(client);
+			client = Client.builder().name(nameTextLine.getText()).topic("default")
+					.expectedRoom(expectedRoomTextLine.getText()).build();
 
-			if (roomStatus.equals("created")) {
+			String connectingResult = service.sendCreateConnectionRequestAndGetTopic(client);
+			client.setTopic(connectingResult);
+
+			if (!connectingResult.equals("empty")) {
 				showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(), "Success",
-						String.format("Information about creating: %s", roomStatus));
+						String.format("Connection active \n Your topic is: %s", connectingResult));
 			}
-
-			changeScene("fxml/ConnectRoomMessaging.fxml", event);
-			
-			log.error(client.toString());
+			changeScene("fxml/ConectRoomMessaging.fxml", event);
 		} catch (Exception e) {
-			log.error(e.getMessage());
 			showAlert(Alert.AlertType.ERROR, ((Node) event.getSource()).getScene().getWindow(), "Sorry :(",
-					e.getMessage());
+					"Room is not created or you write incorrect RoomName");
 		}
 	}
+
 }

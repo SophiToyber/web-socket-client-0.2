@@ -1,4 +1,4 @@
-package appearance.application.ui;
+package appearance.application.ui.creators;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -56,7 +56,7 @@ public class CreateRoomController extends ControllersConfiguration implements IA
 						String.format("Information about creating: %s", roomStatus));
 			}
 
-			changeScene("fxml/ConnectRoomMessaging.fxml", event);
+			changeScene("fxml/CreateRoomMessaging.fxml", event);
 			
 			log.error(client.toString());
 		} catch (Exception e) {

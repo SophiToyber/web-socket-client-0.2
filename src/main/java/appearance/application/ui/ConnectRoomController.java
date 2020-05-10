@@ -53,7 +53,7 @@ public class ConnectRoomController extends ControllersConfiguration implements I
 				showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(), "Success",
 						String.format("Connection active \n Your topic is: %s", connectingResult));
 			}
-			changeScene("fxml/Messaging.fxml", event);
+			changeScene("fxml/ConnnectRoomMessaging.fxml", event);
 		} catch (Exception e) {
 			showAlert(Alert.AlertType.ERROR, ((Node) event.getSource()).getScene().getWindow(), "Sorry :(",
 					"Room is not created or you write incorrect RoomName");
