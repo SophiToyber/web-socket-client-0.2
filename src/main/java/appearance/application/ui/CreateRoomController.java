@@ -30,11 +30,7 @@ public class CreateRoomController extends ControllersConfiguration implements IA
 
 	public static Client client;
 	
-	public CreateRoomController() {
-        this.client = new Client();
-    }
-	
-	public Client getClient() {
+	public static Client getClientFromCreateRoomController() {
 		return client;
 	}
 	

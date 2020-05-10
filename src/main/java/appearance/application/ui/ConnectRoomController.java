@@ -23,6 +23,12 @@ public class ConnectRoomController extends ControllersConfiguration implements I
 	@FXML
 	private TextField expectedRoomTextLine;
 
+	public static Client client;
+
+	public static Client getClientFromConnectRoomController() {
+		return client;
+	}
+
 	public void initialize() {
 		// JavaFX initialization phase
 	}
@@ -37,7 +43,7 @@ public class ConnectRoomController extends ControllersConfiguration implements I
 	public void checkRoom(ActionEvent event) throws IOException {
 		ServerConnectionService service = new ServerConnectionService(new ServerConnector());
 		try {
-			Client client = Client.builder().name(nameTextLine.getText()).topic("default")
+			client = Client.builder().name(nameTextLine.getText()).topic("default")
 					.expectedRoom(expectedRoomTextLine.getText()).build();
 
 			String connectingResult = service.sendCreateConnectionRequestAndGetTopic(client);
@@ -47,7 +53,7 @@ public class ConnectRoomController extends ControllersConfiguration implements I
 				showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(), "Success",
 						String.format("Connection active \n Your topic is: %s", connectingResult));
 			}
-			changeScene("fxml/Messaging.fxml",event);
+			changeScene("fxml/Messaging.fxml", event);
 		} catch (Exception e) {
 			showAlert(Alert.AlertType.ERROR, ((Node) event.getSource()).getScene().getWindow(), "Sorry :(",
 					"Room is not created or you write incorrect RoomName");

@@ -8,12 +8,15 @@ import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.stereotype.Component;
 
+import appearance.application.ui.MessageController;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import web.socket.message.Message;
+
+import static appearance.application.ui.MessageController.updateMessageList;
 
 @Slf4j
 @Data
@@ -40,11 +43,13 @@ public class MyStompSessionHandler extends StompSessionHandlerAdapter {
 			@Override
 			public void handleFrame(StompHeaders headers, Object payload) {
 				Message msg = (Message) payload;
+				updateMessageList(msg);
 				log.info(String.format("Received + %s", msg.getText()));
 			}
 		});
 	}
-	// This medot just do something after connection
+
+	// This method just do something after connection
 	@Override
 	public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
 		System.out.println(String.format("User: %s - connected", message.getFrom()));

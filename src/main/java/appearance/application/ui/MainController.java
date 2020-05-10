@@ -36,7 +36,7 @@ public class MainController extends ControllersConfiguration implements Initiali
 	}
 
 	public void conectToRoom(ActionEvent event) throws IOException {
-		changeScene("fxml/ConnectToRoom.fxml",event);
+		changeScene("fxml/ConnectToRoom.fxml", event);
 	}
 
 	@Override
@@ -44,5 +44,5 @@ public class MainController extends ControllersConfiguration implements Initiali
 		// TODO Auto-generated method stub
 
 	}
-	
+
 }
