@@ -1,13 +1,15 @@
 package appearance.application.ui.creators;
 
-import static appearance.application.ui.CreateRoomController.getClientFromCreateRoomController;
+import static appearance.application.ui.connectors.ConnectRoomController.getClientFromConnectRoomController;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import javax.annotation.PostConstruct;
 
-import appearance.application.ControllersConfiguration;
+import org.springframework.messaging.simp.stomp.StompSession;
+
+import appearance.application.configuration.ControllersConfiguration;
 import appearance.application.ui.interfaces.IAllert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,18 +23,33 @@ import web.socket.message.Message;
 @SuppressWarnings("SpringJavaAutowiringInspection")
 public class CreateRoomMessageController extends ControllersConfiguration implements IAllert {
 
+	public static CreateRoomMessageController messageController;
+	public static Client client;
+
 	@FXML
 	public TextArea messageList;
 
 	@FXML
 	public TextArea message;
 
-	public static CreateRoomMessageController messageController;
-	public static WebSocketClientConfig connector = new WebSocketClientConfig();
+	private WebSocketClientConfig connector = new WebSocketClientConfig();
+	private StompSession session;
 
 	public void initialize() {
 		// JavaFX initialization phase
 		messageController = this;
+		try {
+			client = getClientFromConnectRoomController();
+		} catch (Exception e) {
+			client = getClientFromConnectRoomController();
+			log.error("Error");
+		}
+		try {
+			session = connector.configureWebsocket(client);
+		} catch (InterruptedException | ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -42,17 +59,14 @@ public class CreateRoomMessageController extends ControllersConfiguration implem
 
 	@FXML
 	public void sendMessage(ActionEvent event) throws IOException, InterruptedException, ExecutionException {
-		Client client;
 		try {
-			client = getClientFromCreateRoomController();
+			session.send(String.format("/app/chat/%s", client.getTopic()),
+					Message.builder().from(client.getName()).text(message.getText()).build());
 		} catch (Exception e) {
-			client = getClientFromCreateRoomController();
+			e.printStackTrace();
 		}
-
-		log.info(String.format("ACTUAL USER IS: %s", client));
-		connector.configureWebsocket(client).send(String.format("/app/chat/%s", client.getTopic()),
-				Message.builder().from(client.getName()).text(message.getText()).build());
 		message.clear();
+
 	}
 
 }

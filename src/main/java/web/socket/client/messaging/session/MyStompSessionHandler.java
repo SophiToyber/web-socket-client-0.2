@@ -31,7 +31,7 @@ public class MyStompSessionHandler extends StompSessionHandlerAdapter {
 	// which allows us to override two main and one side methods
 
 	private void subscribeTopic(StompSession session, String endpoint) {
-
+		log.info(String.format("Endpoont was receive: %s", endpoint));
 		session.subscribe(endpoint, new StompFrameHandler() {
 			@Override
 			public Type getPayloadType(StompHeaders headers) {
@@ -43,11 +43,15 @@ public class MyStompSessionHandler extends StompSessionHandlerAdapter {
 			@Override
 			public void handleFrame(StompHeaders headers, Object payload) {
 				Message msg = (Message) payload;
+				log.info(String.format("Received + %s", msg.getText()));
+				try {
 				actualCreateControllerObj.messageList
 						.appendText(String.format("%s: %s \n", msg.getFrom(), msg.getText()));
+				}
+				catch(Exception e){
 				actualConnectControllerObj.messageList
 						.appendText(String.format("%s: %s \n", msg.getFrom(), msg.getText()));
-				log.info(String.format("Received + %s", msg.getText()));
+				}
 			}
 		});
 	}

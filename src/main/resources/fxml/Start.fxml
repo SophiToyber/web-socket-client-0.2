@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -7,32 +9,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0"
-	prefWidth="405.0"
-	style="-fx-background-color: #90EE90; -fx-background-image: url(&quot;file:/home/duck/Messenger/web-socket-client/duck.jpeg&quot;);"
-	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="appearance.application.ui.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="405.0" style="-fx-background-color: #90EE90; -fx-background-image: url(&quot;file:/home/duck/Messenger/1_UI/web-socket-client/img/image.jpg&quot;);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appearance.application.ui.MainController">
 	<children>
-		<HBox alignment="CENTER" layoutX="21.0" layoutY="207.0"
-			prefHeight="57.0" prefWidth="385.0" AnchorPane.bottomAnchor="-7.0"
-			AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-		<Button alignment="CENTER" layoutX="102.0" layoutY="154.0"
-			minWidth="-Infinity" mnemonicParsing="false" onAction="#createRoom"
-			style="-fx-background-color: #5F9EA0;" text="Створити кімнату"
-			textAlignment="CENTER" AnchorPane.leftAnchor="102.0"
-			AnchorPane.rightAnchor="87.0">
+		<HBox alignment="CENTER" layoutX="21.0" layoutY="207.0" prefHeight="57.0" prefWidth="385.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+		<Button alignment="CENTER" layoutX="102.0" layoutY="154.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#createRoom" style="-fx-background-color: #5F9EA0;" text="Створити кімнату" textAlignment="CENTER" AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="87.0">
 			<font>
 				<Font size="20.0" />
 			</font>
 		</Button>
-		<Button alignment="CENTER" layoutX="102.0" layoutY="249.0"
-			minWidth="-Infinity" mnemonicParsing="false" onAction="#conectToRoom"
-			text="   Під'єднатись    " textAlignment="CENTER"
-			AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="87.0">
+		<Button alignment="CENTER" layoutX="102.0" layoutY="249.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#conectToRoom" text="   Під'єднатись    " textAlignment="CENTER" AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="87.0">
 			<font>
 				<Font size="20.0" />
 			</font>
+         <cursor>
+            <Cursor fx:constant="WAIT" />
+         </cursor>
 		</Button>
 	</children>
 </AnchorPane>

@@ -6,13 +6,10 @@ import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 
-import appearance.application.ControllersConfiguration;
+import appearance.application.configuration.ControllersConfiguration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 @SuppressWarnings("SpringJavaAutowiringInspection")
 public class MainController extends ControllersConfiguration implements Initializable {
