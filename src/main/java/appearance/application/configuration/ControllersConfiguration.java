@@ -1,4 +1,4 @@
-package appearance.application;
+package appearance.application.configuration;
 
 import java.io.IOException;
 import java.io.InputStream;

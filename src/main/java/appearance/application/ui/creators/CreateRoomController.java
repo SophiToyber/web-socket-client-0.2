@@ -1,19 +1,16 @@
 package appearance.application.ui.creators;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 import javax.annotation.PostConstruct;
 
-import appearance.application.ControllersConfiguration;
+import appearance.application.configuration.ControllersConfiguration;
 import appearance.application.ui.interfaces.IAllert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import web.socket.client.Client;
 import web.socket.client.connecting.option.ServerConnector;
@@ -29,11 +26,11 @@ public class CreateRoomController extends ControllersConfiguration implements IA
 	private TextField roomTextLine;
 
 	public static Client client;
-	
+
 	public static Client getClientFromCreateRoomController() {
 		return client;
 	}
-	
+
 	public void initialize() {
 		// JavaFX initialization phase
 	}
@@ -52,13 +49,15 @@ public class CreateRoomController extends ControllersConfiguration implements IA
 			String roomStatus = service.sendCreateRoomRequestAndGetStatus(client);
 
 			if (roomStatus.equals("created")) {
-				showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(), "Success",
-						String.format("Information about creating: %s", roomStatus));
+				try {
+					changeScene("fxml/CreateRoomMessaging.fxml", event);
+					showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(), "Success",
+							String.format("Information about creating: %s", roomStatus));
+				} catch (Exception e) {
+					log.error(String.format("ERROR CHANGE SCENE -- %s", e.getMessage()));
+				}
 			}
 
-			changeScene("fxml/CreateRoomMessaging.fxml", event);
-			
-			log.error(client.toString());
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			showAlert(Alert.AlertType.ERROR, ((Node) event.getSource()).getScene().getWindow(), "Sorry :(",
