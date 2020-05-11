@@ -26,16 +26,18 @@ public class WebSocketClientConfig {
 	//@Value( "${url.main}" )
 	private final String URL = "ws://localhost:8086/messages";
 	
+	
+	private WebSocketClient simpleWebSocketClient = new StandardWebSocketClient();
+	private List<Transport> transports = Arrays.asList(new WebSocketTransport(simpleWebSocketClient));
+	
+	// SockJs like subprotocol Websockets, he responsible for delivering messages directly
+	private SockJsClient sockJsClient = new SockJsClient(transports);
+	private WebSocketStompClient stompClient = new WebSocketStompClient(sockJsClient);
+	
 	public StompSession configureWebsocket(Client client) throws InterruptedException, ExecutionException {
+		
 		// The config first creates a set of transport protocols, among which we specify a web socket
-		WebSocketClient simpleWebSocketClient = new StandardWebSocketClient();
-		List<Transport> transports = Arrays.asList(new WebSocketTransport(simpleWebSocketClient));
-		
-		// SockJs like subprotocol Websockets, he responsible for delivering messages directly
-		SockJsClient sockJsClient = new SockJsClient(transports);
-		WebSocketStompClient stompClient = new WebSocketStompClient(sockJsClient);
 		stompClient.setMessageConverter(new MappingJackson2MessageConverter());
-		
 		// Next, we establish a communication session on an already configured channel
 		StompSessionHandler sessionHandler = new MyStompSessionHandler(
 				Message.builder().from(client.getName()).text("default").build());

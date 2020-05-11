@@ -1,4 +1,4 @@
-package appearance.application;
+package appearance.application.configuration;
 
 import javafx.application.Application;
 import org.springframework.boot.SpringApplication;
