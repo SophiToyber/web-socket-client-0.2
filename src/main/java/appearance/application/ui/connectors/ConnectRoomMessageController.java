@@ -13,7 +13,11 @@ import appearance.application.configuration.ControllersConfiguration;
 import appearance.application.ui.interfaces.IAllert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
 import lombok.extern.slf4j.Slf4j;
 import web.socket.client.Client;
 import web.socket.client.messaging.config.WebSocketClientConfig;
@@ -26,14 +30,15 @@ public class ConnectRoomMessageController extends ControllersConfiguration imple
 	public static ConnectRoomMessageController messageController;
 	public static Client client;
 
+	private WebSocketClientConfig connector = new WebSocketClientConfig();
+	private StompSession session;
+	private ActionEvent actionEvent;
+
 	@FXML
 	public TextArea messageList;
 
 	@FXML
 	public TextArea message;
-
-	private WebSocketClientConfig connector = new WebSocketClientConfig();
-	private StompSession session;
 
 	public void initialize() {
 		// JavaFX initialization phase
@@ -41,7 +46,7 @@ public class ConnectRoomMessageController extends ControllersConfiguration imple
 		try {
 			client = getClientFromConnectRoomController();
 		} catch (Exception e) {
-			client = getClientFromConnectRoomController();
+			client = null;
 			log.error("Error");
 		}
 		try {
@@ -66,7 +71,25 @@ public class ConnectRoomMessageController extends ControllersConfiguration imple
 			e.printStackTrace();
 		}
 		message.clear();
+		this.actionEvent = event;
+	}
 
+	@FXML
+	private void handleOnKeyReleased(KeyEvent event) {
+		log.info(String.format("KEY ON PRESS %s", event.getText()));
+		if (event.getText().equals("")) {
+			try {
+				changeScene("fxml/Start.fxml", actionEvent);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			log.info("EXIT WAS PRESSED");
+		}
+		if (event.getText().equals("`") || event.getText().equals("'")) {
+			showAlert(Alert.AlertType.INFORMATION, ((Node) actionEvent.getSource()).getScene().getWindow(), "Ifo",
+					"Program was created by Prosvitlyuk Mikhailo");
+		}
 	}
 
 }
