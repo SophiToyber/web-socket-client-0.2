@@ -15,6 +15,8 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import web.socket.message.Message;
+import static appearance.application.ui.connectors.ConnectRoomController.getClientFromConnectRoomController;
+import static appearance.application.ui.creators.CreateRoomController.getClientFromCreateRoomController;
 
 @Slf4j
 @Builder
@@ -40,17 +42,20 @@ public class MyStompSessionHandler extends StompSessionHandlerAdapter {
 
 			// The method receives the object sent to it by the previous method, it is used
 			// directly to display messages
+			@SuppressWarnings("unlikely-arg-type")
 			@Override
 			public void handleFrame(StompHeaders headers, Object payload) {
 				Message msg = (Message) payload;
 				log.info(String.format("Received + %s", msg.getText()));
 				try {
-				actualCreateControllerObj.messageList
-						.appendText(String.format("%s: %s \n", msg.getFrom(), msg.getText()));
-				}
-				catch(Exception e){
-				actualConnectControllerObj.messageList
-						.appendText(String.format("%s: %s \n", msg.getFrom(), msg.getText()));
+					if (msg.getFromTopic().equals(getClientFromCreateRoomController().getTopic())) {
+						actualCreateControllerObj.messageList
+								.appendText(String.format("%s: %s \n", msg.getFrom(), msg.getText()));
+					}
+				} catch (Exception e) {
+					if (msg.getFromTopic().equals(getClientFromConnectRoomController().getTopic()))
+						actualConnectControllerObj.messageList
+								.appendText(String.format("%s: %s \n", msg.getFrom(), msg.getText()));
 				}
 			}
 		});
@@ -59,7 +64,7 @@ public class MyStompSessionHandler extends StompSessionHandlerAdapter {
 	// This method call subscribe topic method
 	@Override
 	public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
-		System.out.println(String.format("User: %s - connected", message.getFrom()));
+		log.info(String.format("User: %s - connected", message.getFrom()));
 		subscribeTopic(session, "/topic/messages");
 	};
 
