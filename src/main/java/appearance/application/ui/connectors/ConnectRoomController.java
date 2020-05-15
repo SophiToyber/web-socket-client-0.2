@@ -10,7 +10,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import lombok.extern.slf4j.Slf4j;
 import web.socket.client.Client;
 import web.socket.client.connecting.option.ServerConnector;
@@ -20,16 +22,15 @@ import web.socket.client.connecting.service.ServerConnectionService;
 @SuppressWarnings("SpringJavaAutowiringInspection")
 public class ConnectRoomController extends ControllersConfiguration implements IAllert {
 
+	public static Client client;
+
 	@FXML
 	private TextField nameTextLine;
 	@FXML
 	private TextField expectedRoomTextLine;
 
-	public static Client client;
-
-	public static Client getClientFromConnectRoomController() {
-		return client;
-	}
+	@FXML
+	private Button checkButton;
 
 	public void initialize() {
 		// JavaFX initialization phase
@@ -39,6 +40,10 @@ public class ConnectRoomController extends ControllersConfiguration implements I
 	@PostConstruct
 	public void init() {
 
+	}
+
+	public static Client getClientFromConnectRoomController() {
+		return client;
 	}
 
 	@FXML
@@ -66,4 +71,14 @@ public class ConnectRoomController extends ControllersConfiguration implements I
 		}
 	}
 
+	@FXML
+	public void onConnectMouseEntered() throws IOException {
+		checkButton.setStyle(DARK_THEME);
+	}
+
+	@FXML
+	public void onСonnectMouseExited() throws IOException {
+		checkButton.setStyle(WHITE_THEME);
+	}
+	
 }

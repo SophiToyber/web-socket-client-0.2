@@ -22,25 +22,26 @@ import web.socket.message.Message;
 
 @Component
 public class WebSocketClientConfig {
-	
-	//@Value( "${url.main}" )
+
+	// @Value( "${url.main}" )
 	private final String URL = "ws://localhost:8086/messages";
-	
-	
+
 	private WebSocketClient simpleWebSocketClient = new StandardWebSocketClient();
 	private List<Transport> transports = Arrays.asList(new WebSocketTransport(simpleWebSocketClient));
-	
-	// SockJs like subprotocol Websockets, he responsible for delivering messages directly
+
+	// SockJs like subprotocol Websockets, he responsible for delivering messages
+	// directly
 	private SockJsClient sockJsClient = new SockJsClient(transports);
 	private WebSocketStompClient stompClient = new WebSocketStompClient(sockJsClient);
-	
+
 	public StompSession configureWebsocket(Client client) throws InterruptedException, ExecutionException {
-		
-		// The config first creates a set of transport protocols, among which we specify a web socket
+
+		// The config first creates a set of transport protocols, among which we specify
+		// a web socket
 		stompClient.setMessageConverter(new MappingJackson2MessageConverter());
 		// Next, we establish a communication session on an already configured channel
 		StompSessionHandler sessionHandler = new MyStompSessionHandler(
-				Message.builder().from(client.getName()).text("default").build());
+				Message.builder().from(client.getName()).text("default").fromTopic(client.getTopic()).build());
 		StompSession session = stompClient.connect(URL, sessionHandler).get();
 		return session;
 	}

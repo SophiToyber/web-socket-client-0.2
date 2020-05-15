@@ -47,16 +47,18 @@ public class CreateRoomController extends ControllersConfiguration implements IA
 			client = Client.builder().name(nameTextLine.getText()).topic(roomTextLine.getText()).expectedRoom("default")
 					.build();
 			String roomStatus = service.sendCreateRoomRequestAndGetStatus(client);
-
+			log.info(String.format("STATUS IS: %s", roomStatus));
 			if (roomStatus.equals("created")) {
 				try {
+					//changeScene("fxml/CreateRoom.fxml", event);
+					//changeScene("fxml/ConnectRoomMessaging.fxml", event);
 					changeScene("fxml/CreateRoomMessaging.fxml", event);
-					showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(), "Success",
-							String.format("Information about creating: %s", roomStatus));
 				} catch (Exception e) {
 					log.error(String.format("ERROR CHANGE SCENE -- %s", e.getMessage()));
 				}
 			}
+			showAlert(Alert.AlertType.INFORMATION, ((Node) event.getSource()).getScene().getWindow(), "Success",
+					String.format("Information about creating: %s", roomStatus));
 
 		} catch (Exception e) {
 			log.error(e.getMessage());

@@ -1,6 +1,6 @@
 package appearance.application.ui.creators;
 
-import static appearance.application.ui.connectors.ConnectRoomController.getClientFromConnectRoomController;
+import static appearance.application.ui.creators.CreateRoomController.getClientFromCreateRoomController;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -13,7 +13,11 @@ import appearance.application.configuration.ControllersConfiguration;
 import appearance.application.ui.interfaces.IAllert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyEvent;
 import lombok.extern.slf4j.Slf4j;
 import web.socket.client.Client;
 import web.socket.client.messaging.config.WebSocketClientConfig;
@@ -34,14 +38,15 @@ public class CreateRoomMessageController extends ControllersConfiguration implem
 
 	private WebSocketClientConfig connector = new WebSocketClientConfig();
 	private StompSession session;
+	private ActionEvent actionEvent;
 
 	public void initialize() {
 		// JavaFX initialization phase
 		messageController = this;
 		try {
-			client = getClientFromConnectRoomController();
+			client = getClientFromCreateRoomController();
 		} catch (Exception e) {
-			client = getClientFromConnectRoomController();
+			client = getClientFromCreateRoomController();
 			log.error("Error");
 		}
 		try {
@@ -66,7 +71,25 @@ public class CreateRoomMessageController extends ControllersConfiguration implem
 			e.printStackTrace();
 		}
 		message.clear();
+		this.actionEvent = event;
+	}
 
+	@FXML
+	private void handleOnKeyReleased(KeyEvent event) {
+		log.info(String.format("KEY ON PRESS %s", event.getText()));
+		if (event.getText().equals("")) {
+			try {
+				changeScene("fxml/Start.fxml", actionEvent);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				log.info(e.getMessage());
+			}
+			log.info("EXIT WAS PRESSED");
+		}
+		if (event.getText().equals("`") || event.getText().equals("'")) {
+			showAlert(Alert.AlertType.INFORMATION, ((Node) actionEvent.getSource()).getScene().getWindow(), "Ifo",
+					"Program was created by Prosvitlyuk Mikhailo");
+		}
 	}
 
 }
